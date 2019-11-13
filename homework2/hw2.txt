@@ -1,0 +1,50 @@
+(* Problem 7 *)
+I wrote make_parser in terms of make_matcher, because make_parser had much 
+common functionality with make_matcher. In fact, make_parser was simply 
+make_matcher with the added functionality of keeping track of the path
+and converting that path into a tree-like data structure. While I didn't 
+use make_matcher in make_parser, much of the code for make_parser is
+derived from make_matcher.
+
+Make_parser was split into two sections. The first one was almost 
+identical to make_matcher, except it recorded the
+path and returned a list that contained the path of traversal, which was
+a pre-order traversal. This was done by defining two mutually recursive 
+functions. The first function was used to iterate through a particular 
+set of rules, given a nonterminal symbol. Then, this would call the next 
+function which was in charge of traversing through the particular rule.
+If the current symbol was nonterminal, we would recursively call the 
+first function in order to get into the next level. If the current 
+symbol was terminal, we would simply call the first function with the 
+tail end of the fragment. A tricky part of this first part was to chain
+together acceptors. Each time we match a value, we must chain acceptors
+to generate a new acceptor that was passed into the recursively called 
+function. If this was not done, the program would only match the first
+symbol and return.
+
+The second part of make_parser was to convert the path list into a tree 
+structure, using the types defined by the spec. Once again, I defined
+two mutually recursive functions. The first one was in charge of 
+traversing through the path and generating Nodes. The second function 
+was to match the particular rule in our path. If the symbol in the rule 
+was nonterminal, we would recursively call itself and the first function,
+so we can traverse the current symbol as well as getting the trees for
+the particular symbol's siblings. Then we simply appended them together.
+If the symbol in the rule was terminal, we would only recursively call
+the second function. This would simply transform the terminal symbol
+into a leaf and append it to its siblings. This was the hardest part of 
+the homework assignment.
+
+Both make_matcher and make_parser have their weaknesses. They will only
+match the first match that they find. In other words, the order of the 
+rules matter. If a particular pattern matches a particular rule, but
+also matches the rule after it, the matcher will take the first one that
+matched. For example, if we consider my_grammar in my test file, we can
+see that VerbPhrase defines Verb before Verb, Adverb. Thus, if we 
+have a sentence that has an adverb at the end, it will not match. For 
+example, if we use the make_matcher with the accept_all acceptor and 
+the fragment ["Brown"; "Dogs"; "run"; "slowly"], we see the result is
+Some ["slowly"]. This is because, the shorter rule comes first and 
+the matcher thinks it is correct and matches it first. Thus, matcher 
+and parser don't find the best match for the fragment, but they only 
+find the first match. 

@@ -1,0 +1,7 @@
+(# Problem 1 #)
+let subset a b = 
+	let rec loop a b i =
+		if i = List.length a then true
+		else if List.exists(fun x -> x = List.nth a i) b then loop a b (i+1)
+		else false in
+	loop a b 0;;
