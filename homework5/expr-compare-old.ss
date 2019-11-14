@@ -13,15 +13,13 @@
 ;compares two values
 (define (compare_val val1 val2)
   (cond
-    [(equal? val1 val2) (if (equal? val1 'lambda)
-                            'λ
-                            val1)]
+    [(equal? val1 val2) val1]
     [(boolean? val1) (if val1
                           '%
                           '(not %))]
-    [(or (and (equal? 'lambda val1) (equal? 'λ val2))
+    #|[(or (and (equal? 'lambda val1) (equal? 'λ val2))
          (and (equal? 'lambda val2) (equal? 'λ val1)))
-     'λ]
+     'λ]|#
     [(and (list? val1) (list? val2)) (compare_list val1 val2)]
     [else
      (cons 'if (cons '% (cons val1 (cons val2 '()))))]))
@@ -32,6 +30,7 @@
 
 (define (compare_list_helper list1 list2 acc)
   (cond
+    [(not (equal? (length list1) (length list2))) (reverse (cons 'if (cons '% (cons list1 (cons list2 '())))))]
     [(or (empty? list1) (empty? list2)) acc]
     [(and (is_lambda (car list1)) (is_lambda (car list2)) (equal? (length list1) (length list2)) (> (length list1) 2)) (reverse (compare_lambdas list1 list2))]
     [(equal? (car list1) (car list2)) (if (can_combine (car list1))
@@ -62,7 +61,7 @@
 (define (clean-expr-2 expr dict)
   (cond
     [(equal? expr '()) '()]
-    [(and (= (length expr) 4) (equal? (car expr) 'if) (equal? (cadr expr) '%)) (if (> (dict-ref dict expr) 1)
+    [(and (= (length expr) 4) (equal? (car expr) 'if) (equal? (cadr expr) '%)) (if (and (dict-has-key? dict expr) (> (dict-ref dict expr) 1))
                                                                                    (make_bound (caddr expr) (cadddr expr))
                                                                                    expr)]
     [(list? (car expr)) (cons (clean-expr-2 (car expr) dict) (clean-expr-2 (cdr expr) dict))]
@@ -172,7 +171,7 @@
 
 
 ;test cases for expr-compare
-#|(expr-compare 12 12)
+(expr-compare 12 12)
 (expr-compare 12 20)
 (expr-compare #t #t)
 (expr-compare #f #f)
@@ -199,7 +198,7 @@
 (expr-compare '((λ (a b) (f a b)) 1 2)
               '((λ (a b) (f b a)) 1 2))
 (expr-compare '((λ (a b) (f a b)) 1 2)
-              '((λ (a c) (f c a)) 1 2))|#
+              '((λ (a c) (f c a)) 1 2))
 (expr-compare '((lambda (lambda) (+ lambda if (f lambda))) 3)
               '((lambda (if) (+ if if (f λ))) 3))
 (expr-compare '((lambda (a) (eq? a ((λ (a b) ((λ (a b) (a b)) b a))
@@ -228,3 +227,4 @@
                               1
                               (* x ((g) (- x 1)))))))
                 9))
+(expr-compare '(lambda (a b) (a b c)) '(lambda (x y) x))
