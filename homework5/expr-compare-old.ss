@@ -33,7 +33,7 @@
 (define (compare_list_helper list1 list2 acc)
   (cond
     [(or (empty? list1) (empty? list2)) acc]
-    [(and (is_lambda (car list1)) (is_lambda (car list2)) (equal? (length list1) (length list2)) (> (length list1) 2)) (compare_lambdas list1 list2)]
+    [(and (is_lambda (car list1)) (is_lambda (car list2)) (equal? (length list1) (length list2)) (> (length list1) 2)) (reverse (compare_lambdas list1 list2))]
     [(equal? (car list1) (car list2)) (if (can_combine (car list1))
                                           (compare_list_helper (cdr list1) (cdr list2) (cons (compare_val (car list1) (car list2)) acc))
                                           (reverse (cons 'if (cons '% (cons list1 (cons list2 '()))))))]
@@ -48,7 +48,6 @@
     [(equal? keyword 'quote) #f]
     [else #t]))
 
-;((λ (lambda!if) (+ (if % lambda if) if (f λ))) 3)
 ;cleans expression by replacing anything possible
 (define (clean-expr-1 expr dict)
   (cond 
@@ -75,7 +74,8 @@
   (define dict (dict-set #hash() '() '()))
   (let ([new-dict1 (populate_dict1 (cadr list1) (cadr list2) dict)]
         [new-dict2 (populate_dict2 (cadr list1) (cadr list2) dict)])
-  (cons (compare_lambdas_helper (modify1 (cdr list1) new-dict1) (modify2 (cdr list2) new-dict2) '()) (cons 'λ '()))))
+  (cons 'λ (cons (compare_lambdas_helper (modify1 (cadr list1) new-dict1) (modify2 (cadr list2) new-dict2) '())
+                 (compare_lambdas_helper (modify1 (cddr list1) new-dict1) (modify2 (cddr list2) new-dict2) '())))))
 
 (define (compare_lambdas_helper list1 list2 acc)
   (cond
@@ -169,6 +169,8 @@
      (let ([new-dict (dict-set dict (car args2) (car args1))]) 
      (populate_dict2 (cdr args1) (cdr args2) new-dict))]))
 
+
+
 ;test cases for expr-compare
 #|(expr-compare 12 12)
 (expr-compare 12 20)
@@ -208,7 +210,7 @@
                 (lambda (a b) (a b))))
 
 ;TA's test cases start here
-#|(expr-compare '(λ (x) ((λ (x) x) x))
+(expr-compare '(λ (x) ((λ (x) x) x))
               '(λ (y) ((λ (x) y) x)))
 (expr-compare '(((λ (g)
                    ((λ (x) (g (lambda () (x x))))     ; This is the way we define a recursive function
@@ -225,4 +227,4 @@
                    (λ (x) (if (= x 0)
                               1
                               (* x ((g) (- x 1)))))))
-                9))|#
+                9))
