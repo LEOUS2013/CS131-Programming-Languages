@@ -2,10 +2,10 @@
 
 ;main function
 (define (expr-compare expr1 expr2)
-  (define dict (make-hash))
+  (define dict (dict-set #hash() '() '()))
   (cond
     [(list? expr1) (if (list? expr2)
-                       (clean-expr-2 (clean-expr-1 (compare_list expr1 expr2) dict) dict)
+                       (clean-expr-2 (compare_list expr1 expr2) (clean-expr-1 (compare_list expr1 expr2) dict))
                        (cons 'if (cons '% (cons expr1 (cons expr2 '())))))]
     [(list? expr2) (cons 'if (cons '% (cons expr1 (cons expr2 '()))))]
     [else (compare_val expr1 expr2)]))
@@ -48,15 +48,17 @@
     [(equal? keyword 'quote) #f]
     [else #t]))
 
+;((λ (lambda!if) (+ (if % lambda if) if (f λ))) 3)
 ;cleans expression by replacing anything possible
 (define (clean-expr-1 expr dict)
-  (cond
-   [(equal? expr '()) '()]
-   [(and (= (length expr) 4) (equal? (car expr) 'if) (equal? (cadr expr) '%)) (and (if (dict-has-key? dict expr)
-                                                                                  (dict-set! dict expr (+ 1 (dict-ref dict expr)))
-                                                                                  (dict-set! dict expr 1)) expr)]
-   [(list? (car expr)) (cons (clean-expr-1 (car expr) dict) (clean-expr-1 (cdr expr) dict))]
-   [else (cons (car expr) (clean-expr-1 (cdr expr) dict))]))
+  (cond 
+   [(equal? expr '()) dict]
+   [(and (list? (car expr)) (= (length (car expr)) 4) (equal? (caar expr) 'if) (equal? (cadr (car expr)) '%))
+                           (if (dict-has-key? dict (car expr))
+                               (let ([new-dict (dict-set dict (car expr) (+ 1 (dict-ref dict (car expr))))]) (clean-expr-1 (cdr expr) new-dict))
+                               (let ([new-dict (dict-set dict (car expr) 1)]) (clean-expr-1 (cdr expr) new-dict)))]
+   [(list? (car expr)) (clean-expr-1 (cdr expr) (clean-expr-1 (car expr) dict))]
+   [else (clean-expr-1 (cdr expr) dict)]))
 
 (define (clean-expr-2 expr dict)
   (cond
@@ -70,15 +72,17 @@
 
 ;compares two lambda functions
 (define (compare_lambdas list1 list2)
-  (define dict1 (make-hash))
-  (define dict2 (make-hash))
-  (reverse (cons 'λ (cons (reverse (populate_dict (cadr list1) (cadr list2) dict1 dict2 '())) (list (reverse (compare_lambdas_helper (modify1 (caddr list1) dict1) (modify2 (caddr list2) dict2) '())))))))
+  (define dict (dict-set #hash() '() '()))
+  (let ([new-dict1 (populate_dict1 (cadr list1) (cadr list2) dict)]
+        [new-dict2 (populate_dict2 (cadr list1) (cadr list2) dict)])
+  (cons (compare_lambdas_helper (modify1 (cdr list1) new-dict1) (modify2 (cdr list2) new-dict2) '()) (cons 'λ '()))))
 
 (define (compare_lambdas_helper list1 list2 acc)
   (cond
-    [(or (empty? list1) (empty? list2)) acc]
-    ;[(and (list? (car list1)) (list? (car list2)) (is_lambda (caar list1)) (is_lambda (caar list2))) 
-    ; (compare_lambdas_helper (cdr list1) (cdr list1) (cons (compare_lambdas (car list1) (car list2)) acc))]
+    [(or (empty? list1) (empty? list2)) (reverse acc)]
+    [(and (list? (car list1)) (list? (car list2))) (if (and (is_lambda (caar list1)) (is_lambda (caar list2)))
+                                                       (compare_lambdas_helper (cdr list1) (cdr list2) (cons (compare_lambdas (car list1) (car list2)) acc))
+                                                       (compare_lambdas_helper (cdr list1) (cdr list2) (cons (compare_lambdas_helper (car list1) (car list2) '()) acc)))]
     [(equal? (car list1) (car list2))
      (compare_lambdas_helper (cdr list1) (cdr list2) (cons (car list1) acc))]
     [else
@@ -137,19 +141,33 @@
     [else
      (cons (car list) (modify2 (cdr list) dict))]))
 
-;populates both dictionaries with mappings from both lambda function arguments
-(define (populate_dict args1 args2 dict1 dict2 acc)
+;populates dictionary1 with mappings from first lambda's arguments to second lambda's arguments
+(define (populate_dict1 args1 args2 dict)
   (cond
-    [(or (equal? args1 empty) (equal? args2 empty)) acc]
+    [(or (equal? args1 empty) (equal? args2 empty)) dict]
     [(and (symbol? args1) (symbol? args2))
      (if (equal? args1 args2)
-         (cons (make_bound args1 args2) acc)
-         (and (dict-set! dict1 args1 args2) (dict-set! dict2 args2 args1)))]
+         dict
+         (dict-set dict args1 args2))]
     [(equal? (car args1) (car args2))
-     (populate_dict (cdr args1) (cdr args2) dict1 dict2 (cons (car args1) acc))]
+     (populate_dict1 (cdr args1) (cdr args2) dict)]
     [else
-     (and (dict-set! dict1 (car args1) (car args2)) (dict-set! dict2 (car args2) (car args1)) (populate_dict (cdr args1) (cdr args2) dict1 dict2 (cons (make_bound (car args1) (car args2)) acc)))]))
-         
+     (let ([new-dict (dict-set dict (car args1) (car args2))]) 
+     (populate_dict1 (cdr args1) (cdr args2) new-dict))]))
+
+;populates dictionary2 with mappings from second lambda's arguments to first lambda's arguments
+(define (populate_dict2 args1 args2 dict)
+  (cond
+    [(or (equal? args1 empty) (equal? args2 empty)) dict]
+    [(and (symbol? args1) (symbol? args2))
+     (if (equal? args1 args2)
+         dict
+         (dict-set dict args2 args1))]
+    [(equal? (car args1) (car args2))
+     (populate_dict2 (cdr args1) (cdr args2) dict)]
+    [else
+     (let ([new-dict (dict-set dict (car args2) (car args1))]) 
+     (populate_dict2 (cdr args1) (cdr args2) new-dict))]))
 
 ;test cases for expr-compare
 #|(expr-compare 12 12)
@@ -190,7 +208,7 @@
                 (lambda (a b) (a b))))
 
 ;TA's test cases start here
-(expr-compare '(λ (x) ((λ (x) x) x))
+#|(expr-compare '(λ (x) ((λ (x) x) x))
               '(λ (y) ((λ (x) y) x)))
 (expr-compare '(((λ (g)
                    ((λ (x) (g (lambda () (x x))))     ; This is the way we define a recursive function
@@ -207,4 +225,4 @@
                    (λ (x) (if (= x 0)
                               1
                               (* x ((g) (- x 1)))))))
-                9))
+                9))|#
