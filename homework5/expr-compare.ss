@@ -1,5 +1,7 @@
 #lang racket
+(current-namespace (make-base-namespace))
 
+;Problem 1
 ;main function
 (define (expr-compare expr1 expr2)
   (define dict (dict-set #hash() '() '()))
@@ -32,7 +34,12 @@
   (cond
     [(not (equal? (length list1) (length list2))) (reverse (cons 'if (cons '% (cons list1 (cons list2 '())))))]
     [(or (empty? list1) (empty? list2)) acc]
-    [(and (is_lambda (car list1)) (is_lambda (car list2)) (equal? (length list1) (length list2)) (> (length list1) 2)) (reverse (compare_lambdas list1 list2))]
+    [(or (and (is_lambda (car list1)) (not (is_lambda (car list2))))
+         (and (is_lambda (car list2)) (not (is_lambda (car list1)))))
+     (reverse (cons 'if (cons '% (cons (cons 'λ (cdr list1)) (cons list2 '())))))]
+    [(and (is_lambda (car list1)) (is_lambda (car list2)) (equal? (length list1) (length list2)) (> (length list1) 2)) (if (not (equal? (length (cadr list1)) (length (cadr list2))))
+                                                                                                                           (reverse (cons 'if (cons '% (cons (cons 'λ (cdr list1)) (list (cons 'λ (cdr list2)))))))
+                                                                                                                           (reverse (compare_lambdas list1 list2)))]
     [(equal? (car list1) (car list2)) (if (can_combine (car list1))
                                           (compare_list_helper (cdr list1) (cdr list2) (cons (compare_val (car list1) (car list2)) acc))
                                           (reverse (cons 'if (cons '% (cons list1 (cons list2 '()))))))]
@@ -169,6 +176,25 @@
      (populate_dict2 (cdr args1) (cdr args2) new-dict))]))
 
 
+;Problem 2
+(define (replace list replaced replacement)
+  (cond
+    [(equal? list empty) '()]
+    [(list? (car list)) (cons (replace (car list) replaced replacement) (replace (cdr list) replaced replacement))]
+    [(equal? (car list) replaced) (cons replacement (replace (cdr list) replaced replacement))]
+    [else (cons (car list) (replace (cdr list) replaced replacement))]))
+
+(define (test-expr-compare x y)
+  (let ([result (expr-compare x y)])
+  (cond
+    [(equal? (eval (replace result '% '#t)) (eval (replace result '% '#f))) '#t]
+    [else '#f])))
+
+;Problem 3
+(define test-expr-x '(+ 1 ((lambda (a b) (+ a b)) 3 ((λ (c) (* 2 c)) 1))))
+(define test-expr-y '(+ 1 ((λ (x y) (+ x y)) 3 ((lambda (c) (* c 2)) 1))))
+
+;(test-expr-compare test-expr-x test-expr-y)
 
 ;test cases for expr-compare
 (expr-compare 12 12)
@@ -208,7 +234,7 @@
                                 a (λ (b) a))))
                 (lambda (a b) (a b))))
 
-;TA's test cases start here
+;Piazza and TA's test cases start here
 (expr-compare '(λ (x) ((λ (x) x) x))
               '(λ (y) ((λ (x) y) x)))
 (expr-compare '(((λ (g)
@@ -228,3 +254,16 @@
                               (* x ((g) (- x 1)))))))
                 9))
 (expr-compare '(lambda (a b) (a b c)) '(lambda (x y) x))
+(expr-compare '(lambda (a b) a) '(lambda (b) b))
+(expr-compare '(cons a b) '(cons a b))
+(expr-compare '(cons a lambda) '(cons a λ))
+(expr-compare '(lambda (a) a) '(lambda (b) b))
+(expr-compare '(lambda (a) b) '(cons (c) b))
+(expr-compare '((lambda (if) (+ if 1)) 3) '((lambda (fi) (+ fi 1)) 3))
+(expr-compare '(λ (if) (if 1 2 3)) '(λ (g) (g 1 2 3)))
+(expr-compare '((lambda (lambda) (+ lambda if (f lambda))) 3)
+              '((lambda (if) (+ if if (f λ))) 3))
+(expr-compare '(lambda (lambda) lambda) '(lambda (lambda) lambda))
+(expr-compare ''lambda '(quote λ))
+(expr-compare '(lambda (a b) a) '(lambda (b) b))
+(expr-compare '(lambda (let) (let ((x 1)) x)) '(lambda (let) (let ((y 1)) y)))
