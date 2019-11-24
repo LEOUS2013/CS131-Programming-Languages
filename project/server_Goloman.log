@@ -1,0 +1,25 @@
+INFO:root:established a connection with neighboring server
+INFO:root:received from neighboring server: AT Hands 54556200.4751606 kiwi.cs.ucla.edu +34.068930-118.445127 1520023934.918963997
+INFO:root:updating location info for client kiwi.cs.ucla.edu
+INFO:root:closed connection with neighboring server
+INFO:root:established a connection with neighboring server
+INFO:root:received from neighboring server: AT Hands 54556200.4751606 kiwi.cs.ucla.edu +34.068930-118.445127 1520023934.918963997
+INFO:root:location info already up to date for client kiwi.cs.ucla.edu
+INFO:root:closed connection with neighboring server
+INFO:root:flooding to servers Hands, Holiday, Wilkes
+INFO:root:attempting to connect to server Hands
+INFO:root:successfully connected to server Hands
+INFO:root:sent to neighboring server Hands: AT Hands 54556200.4751606 kiwi.cs.ucla.edu +34.068930-118.445127 1520023934.918963997
+INFO:root:closed connection with server Hands
+INFO:root:attempting to connect to server Holiday
+INFO:root:successfully connected to server Holiday
+INFO:root:sent to neighboring server Holiday: AT Hands 54556200.4751606 kiwi.cs.ucla.edu +34.068930-118.445127 1520023934.918963997
+INFO:root:established a connection with neighboring server
+INFO:root:received from neighboring server: AT Hands 54556200.4751606 kiwi.cs.ucla.edu +34.068930-118.445127 1520023934.918963997
+INFO:root:location info already up to date for client kiwi.cs.ucla.edu
+INFO:root:closed connection with neighboring server
+INFO:root:closed connection with server Holiday
+INFO:root:attempting to connect to server Wilkes
+INFO:root:successfully connected to server Wilkes
+INFO:root:sent to neighboring server Wilkes: AT Hands 54556200.4751606 kiwi.cs.ucla.edu +34.068930-118.445127 1520023934.918963997
+INFO:root:closed connection with server Wilkes

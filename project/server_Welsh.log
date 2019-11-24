@@ -1,0 +1,9 @@
+INFO:root:established a connection with neighboring server
+INFO:root:received from neighboring server: AT Hands 54556200.4751606 kiwi.cs.ucla.edu +34.068930-118.445127 1520023934.918963997
+INFO:root:updating location info for client kiwi.cs.ucla.edu
+INFO:root:closed connection with neighboring server
+INFO:root:flooding to servers Holiday
+INFO:root:attempting to connect to server Holiday
+INFO:root:successfully connected to server Holiday
+INFO:root:sent to neighboring server Holiday: AT Hands 54556200.4751606 kiwi.cs.ucla.edu +34.068930-118.445127 1520023934.918963997
+INFO:root:closed connection with server Holiday

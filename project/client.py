@@ -20,11 +20,12 @@ class Client:
         print('{} send: {}'.format(self.name, message))
         writer.write(message.encode())
 
-        data = await reader.readline()
+        data = await reader.read(100000)
         print('{} received: {}'.format(self.name, data.decode()))
 
         print('close the socket')
         writer.close()
+        await writer.wait_closed()
 
     def run_until_quit(self):
         # start the loop

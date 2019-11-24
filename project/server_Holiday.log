@@ -1,9 +1,12 @@
-INFO:root:established a connection with client kiwi.cs.ucla.edu
-INFO:root:received from client kiwi.cs.ucla.edu: IAMAT kiwi.cs.ucla.edu +34.068930-118.445127 1520023934.918963997
+INFO:root:established a connection with neighboring server
+INFO:root:received from neighboring server: AT Hands 54556200.4751606 kiwi.cs.ucla.edu +34.068930-118.445127 1520023934.918963997
 INFO:root:updating location info for client kiwi.cs.ucla.edu
-INFO:root:sent to client kiwi.cs.ucla.edu: AT Hands 54556200.4751606 kiwi.cs.ucla.edu +34.068930-118.445127 1520023934.918963997
-INFO:root:closed connection with client kiwi.cs.ucla.edu
-INFO:root:flooding to servers Wilkes, Goloman
+INFO:root:closed connection with neighboring server
+INFO:root:flooding to servers Welsh, Wilkes, Goloman
+INFO:root:attempting to connect to server Welsh
+INFO:root:successfully connected to server Welsh
+INFO:root:sent to neighboring server Welsh: AT Hands 54556200.4751606 kiwi.cs.ucla.edu +34.068930-118.445127 1520023934.918963997
+INFO:root:closed connection with server Welsh
 INFO:root:attempting to connect to server Wilkes
 INFO:root:successfully connected to server Wilkes
 INFO:root:sent to neighboring server Wilkes: AT Hands 54556200.4751606 kiwi.cs.ucla.edu +34.068930-118.445127 1520023934.918963997
