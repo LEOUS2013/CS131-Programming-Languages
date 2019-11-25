@@ -1,25 +1,124 @@
 INFO:root:established a connection with neighboring server
-INFO:root:received from neighboring server: AT Hands 54556200.4751606 kiwi.cs.ucla.edu +34.068930-118.445127 1520023934.918963997
-INFO:root:updating location info for client kiwi.cs.ucla.edu
+INFO:root:received from neighboring server: AT Hands 54690997.582561016 dog.cs.ucla.edu +34.068930-118.445127 1520023934.918963997
+INFO:root:updating location info for client dog.cs.ucla.edu
 INFO:root:closed connection with neighboring server
 INFO:root:flooding to servers Welsh, Wilkes, Goloman
 INFO:root:attempting to connect to server Welsh
+INFO:root:established connection with unknown client
+INFO:root:INVALID message received: 
+INFO:root:sent: ? 
+INFO:root:closed connection with unknown client
 INFO:root:successfully connected to server Welsh
-INFO:root:sent to neighboring server Welsh: AT Hands 54556200.4751606 kiwi.cs.ucla.edu +34.068930-118.445127 1520023934.918963997
+INFO:root:sent to neighboring server Welsh: AT Hands 54690997.582561016 dog.cs.ucla.edu +34.068930-118.445127 1520023934.918963997
+INFO:root:established a connection with neighboring server
+INFO:root:received from neighboring server: AT Hands 54690997.582561016 dog.cs.ucla.edu +34.068930-118.445127 1520023934.918963997
+INFO:root:location info already up to date for client dog.cs.ucla.edu
+INFO:root:closed connection with neighboring server
+INFO:root:established connection with unknown client
+INFO:root:INVALID message received: 
+INFO:root:sent: ? 
+INFO:root:closed connection with unknown client
 INFO:root:closed connection with server Welsh
 INFO:root:attempting to connect to server Wilkes
 INFO:root:successfully connected to server Wilkes
-INFO:root:sent to neighboring server Wilkes: AT Hands 54556200.4751606 kiwi.cs.ucla.edu +34.068930-118.445127 1520023934.918963997
+INFO:root:sent to neighboring server Wilkes: AT Hands 54690997.582561016 dog.cs.ucla.edu +34.068930-118.445127 1520023934.918963997
 INFO:root:closed connection with server Wilkes
 INFO:root:attempting to connect to server Goloman
 INFO:root:successfully connected to server Goloman
-INFO:root:sent to neighboring server Goloman: AT Hands 54556200.4751606 kiwi.cs.ucla.edu +34.068930-118.445127 1520023934.918963997
+INFO:root:sent to neighboring server Goloman: AT Hands 54690997.582561016 dog.cs.ucla.edu +34.068930-118.445127 1520023934.918963997
 INFO:root:closed connection with server Goloman
 INFO:root:established a connection with neighboring server
-INFO:root:received from neighboring server: AT Hands 54556200.4751606 kiwi.cs.ucla.edu +34.068930-118.445127 1520023934.918963997
-INFO:root:location info already up to date for client kiwi.cs.ucla.edu
+INFO:root:received from neighboring server: AT Hands 54690997.582561016 dog.cs.ucla.edu +34.068930-118.445127 1520023934.918963997
+INFO:root:location info already up to date for client dog.cs.ucla.edu
 INFO:root:closed connection with neighboring server
+INFO:root:established connection with unknown client
+INFO:root:INVALID message received: 
+INFO:root:sent: ? 
+INFO:root:closed connection with unknown client
+INFO:root:established a connection with client dog.cs.ucla.edu
+INFO:root:received from client dog.cs.ucla.edu: IAMAT dog.cs.ucla.edu +34.068930-118.445127 1520023934.918963997
+INFO:root:location info already up to date for client dog.cs.ucla.edu
+INFO:root:sent to client dog.cs.ucla.edu: AT Holiday 54691018.20950699 dog.cs.ucla.edu +34.068930-118.445127 1520023934.918963997
+INFO:root:established a connection with client kiwi.cs.ucla.edu
+INFO:root:received from client kiwi.cs.ucla.edu: IAMAT kiwi.cs.ucla.edu +34.068930-118.445127 1520023934.918963997
+INFO:root:updating location info for client kiwi.cs.ucla.edu
+INFO:root:sent to client kiwi.cs.ucla.edu: AT Holiday 54691096.60793829 kiwi.cs.ucla.edu +34.068930-118.445127 1520023934.918963997
+INFO:root:flooding to servers Welsh, Wilkes, Goloman
+INFO:root:attempting to connect to server Welsh
+INFO:root:successfully connected to server Welsh
+INFO:root:sent to neighboring server Welsh: AT Holiday 54691096.60793829 kiwi.cs.ucla.edu +34.068930-118.445127 1520023934.918963997
+INFO:root:closed connection with server Welsh
+INFO:root:attempting to connect to server Wilkes
+INFO:root:successfully connected to server Wilkes
+INFO:root:sent to neighboring server Wilkes: AT Holiday 54691096.60793829 kiwi.cs.ucla.edu +34.068930-118.445127 1520023934.918963997
+INFO:root:closed connection with server Wilkes
+INFO:root:attempting to connect to server Goloman
+INFO:root:successfully connected to server Goloman
+INFO:root:sent to neighboring server Goloman: AT Holiday 54691096.60793829 kiwi.cs.ucla.edu +34.068930-118.445127 1520023934.918963997
+INFO:root:closed connection with server Goloman
 INFO:root:established a connection with neighboring server
-INFO:root:received from neighboring server: AT Hands 54556200.4751606 kiwi.cs.ucla.edu +34.068930-118.445127 1520023934.918963997
+INFO:root:received from neighboring server: AT Holiday 54691096.60793829 kiwi.cs.ucla.edu +34.068930-118.445127 1520023934.918963997
 INFO:root:location info already up to date for client kiwi.cs.ucla.edu
 INFO:root:closed connection with neighboring server
+INFO:root:established connection with unknown client
+INFO:root:INVALID message received: 
+INFO:root:sent: ? 
+INFO:root:closed connection with unknown client
+INFO:root:established a connection with neighboring server
+INFO:root:received from neighboring server: AT Holiday 54691096.60793829 kiwi.cs.ucla.edu +34.068930-118.445127 1520023934.918963997
+INFO:root:location info already up to date for client kiwi.cs.ucla.edu
+INFO:root:closed connection with neighboring server
+INFO:root:established connection with unknown client
+INFO:root:INVALID message received: 
+INFO:root:sent: ? 
+INFO:root:closed connection with unknown client
+INFO:root:established a connection with neighboring server
+INFO:root:received from neighboring server: AT Holiday 54691096.60793829 kiwi.cs.ucla.edu +34.068930-118.445127 1520023934.918963997
+INFO:root:location info already up to date for client kiwi.cs.ucla.edu
+INFO:root:closed connection with neighboring server
+INFO:root:established connection with unknown client
+INFO:root:INVALID message received: 
+INFO:root:sent: ? 
+INFO:root:closed connection with unknown client
+INFO:root:established a connection with client dog.cs.ucla.edu
+INFO:root:received from client dog.cs.ucla.edu: WHATSAT dog.cs.ucla.edu 10 1
+INFO:root:sent to client dog.cs.ucla.edu: AT Holiday 54691179.70689201 dog.cs.ucla.edu +34.068930-118.445127 1520023934.918963997
+{
+    "html_attributions": [],
+    "results": [
+        {
+            "geometry": {
+                "location": {
+                    "lat": 34.0688873,
+                    "lng": -118.4450169
+                },
+                "viewport": {
+                    "northeast": {
+                        "lat": 34.0702312302915,
+                        "lng": -118.4436835197085
+                    },
+                    "southwest": {
+                        "lat": 34.0675332697085,
+                        "lng": -118.4463814802915
+                    }
+                }
+            },
+            "icon": "https://maps.gstatic.com/mapfiles/place_api/icons/geocode-71.png",
+            "id": "ef162ea4f60a0b3933fae75544dba377b996befa",
+            "name": "Westwood Plaza",
+            "place_id": "ChIJ6Re7qYi8woAR22jVhVAye2M",
+            "reference": "ChIJ6Re7qYi8woAR22jVhVAye2M",
+            "scope": "GOOGLE",
+            "types": [
+                "route"
+            ],
+            "vicinity": "Los Angeles"
+        }
+    ],
+    "status": "OK"
+
+
+INFO:root:established connection with unknown client
+INFO:root:INVALID message received: 
+INFO:root:sent: ? 
+INFO:root:closed connection with unknown client

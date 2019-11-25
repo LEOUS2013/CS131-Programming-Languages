@@ -97,49 +97,51 @@ class Server:
         self.writer = None
     
     async def interpret_message(self, reader, writer):
-        data = await reader.readline()
-        message = data.decode()
-        message = message[:-1]
-        tokens = message.split()
-        if (len(tokens) != 4) or (tokens[0] not in commands):
-            if (len(tokens) != 6) or (tokens[0] != "AT"):
-                invalid_message(message, writer)
-            else:
-                #no need to check the parameters of 'AT' because server sent it and it must be correct
-                logging.info("established a connection with neighboring server")
-                logging.info("received from neighboring server: {}".format(message))
-
-                #if location info is present already, don't flood, else flood
-                location = valid_location(tokens[4])[1:3]
-                if tokens[3] not in self.client_locations or float(self.client_locations[tokens[3]][1]) < float(tokens[5]):
-                    logging.info("updating location info for client {}".format(tokens[3]))
-                    self.client_locations[tokens[3]] = location, tokens[5]
-                    #propagate info to other servers
-                    self.loop.create_task(self.flood(message))
-                else:
-                    logging.info("location info already up to date for client {}".format(tokens[3]))
-                
-                logging.info("closed connection with neighboring server")
-        else:
-            if tokens[0] == 'WHATSAT':
-                if (not tokens[2].isdigit()) or (not tokens[3].isdigit()):
+        while not reader.at_eof():
+            data = await reader.readline()
+            message = data.decode()
+            message = message[:-1]
+            tokens = message.split()
+            if (len(tokens) != 4) or (tokens[0] not in commands):
+                if (len(tokens) != 6) or (tokens[0] != "AT"):
                     invalid_message(message, writer)
                 else:
-                    #log the client's info
-                    logging.info("established a connection with client {}".format(tokens[1]))
-                    logging.info("received from client {}: {}".format(tokens[1], message))
-                    self.process_whatsat(tokens, writer)
-            elif tokens[0] == 'IAMAT':
-                if (not valid_timestamp(tokens[3])[0]) or (not valid_location(tokens[2])[0]):
-                    invalid_message(message, writer)
-                else:
-                    #log the client's info
-                    logging.info("established a connection with client {}".format(tokens[1]))
-                    logging.info("received from client {}: {}".format(tokens[1], message))
-                    self.process_iamat(tokens, writer)
-            else:
-                invalid_message(message)
+                    #no need to check the parameters of 'AT' because server sent it and it must be correct
+                    logging.info("established a connection with neighboring server")
+                    logging.info("received from neighboring server: {}".format(message))
 
+                    #if location info is present already, don't flood, else flood
+                    location = valid_location(tokens[4])[1:3]
+                    if tokens[3] not in self.client_locations or float(self.client_locations[tokens[3]][1]) < float(tokens[5]):
+                        logging.info("updating location info for client {}".format(tokens[3]))
+                        self.client_locations[tokens[3]] = location, tokens[5]
+                        #propagate info to other servers
+                        self.loop.create_task(self.flood(message))
+                    else:
+                        logging.info("location info already up to date for client {}".format(tokens[3]))
+                    
+                    logging.info("closed connection with neighboring server")
+            else:
+                if tokens[0] == 'WHATSAT':
+                    if (not tokens[2].isdigit()) or (not tokens[3].isdigit()):
+                        invalid_message(message, writer)
+                    else:
+                        #log the client's info
+                        logging.info("established a connection with client {}".format(tokens[1]))
+                        logging.info("received from client {}: {}".format(tokens[1], message))
+                        self.process_whatsat(tokens, writer)
+                elif tokens[0] == 'IAMAT':
+                    if (not valid_timestamp(tokens[3])[0]) or (not valid_location(tokens[2])[0]):
+                        invalid_message(message, writer)
+                    else:
+                        #log the client's info
+                        logging.info("established a connection with client {}".format(tokens[1]))
+                        logging.info("received from client {}: {}".format(tokens[1], message))
+                        self.process_iamat(tokens, writer)
+                else:
+                    invalid_message(message, writer)
+        await writer.drain()
+        writer.close()
     
     def run_until_interrupted(self):
         self.loop = asyncio.get_event_loop()
@@ -174,10 +176,6 @@ class Server:
 
         #log info
         logging.info("sent to client {}: {}".format(tokens_list[1], ret_string))
-
-        #close the connection
-        writer.close()
-        logging.info("closed connection with client {}".format(tokens_list[1]))
         return
 
     def process_whatsat(self, tokens_list, writer):
@@ -201,13 +199,7 @@ class Server:
             time_diff = time.time() - float(self.client_locations[tokens_list[1]][1])
 
             #call the query function
-            task = self.loop.create_task(self.query_google(query, time_diff, tokens_list[1], num_results, writer))
-
-            def close_writer(task):
-                writer.close()
-                logging.info("closed connection with client {}".format(tokens_list[1]))
-
-            task.add_done_callback(close_writer)
+            self.loop.create_task(self.query_google(query, time_diff, tokens_list[1], num_results, writer))
         return
     
     async def query_google(self, query, time_diff, client, num_results, writer):
@@ -281,4 +273,6 @@ if __name__ == '__main__':
 """some tests
 IAMAT kiwi.cs.ucla.edu +34.068930-118.445127 1520023934.918963997
 WHATSAT kiwi.cs.ucla.edu 10 5
+IAMAT dog.cs.ucla.edu +34.068930-118.445127 1520023934.918963997
+WHATSAT dog.cs.ucla.edu 10 5
 """
