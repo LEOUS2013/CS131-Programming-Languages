@@ -1,26 +1,18 @@
 INFO:root:established a connection with neighboring server
-INFO:root:received from neighboring server: AT Hands 54690997.582561016 dog.cs.ucla.edu +34.068930-118.445127 1520023934.918963997
-INFO:root:updating location info for client dog.cs.ucla.edu
-INFO:root:closed connection with neighboring server
+INFO:root:received from neighboring server: AT Hands 54724239.04519844 kiwi.cs.ucla.edu +34.068930-118.445127 1520023934.918963997
+INFO:root:updating location info for client kiwi.cs.ucla.edu
 INFO:root:flooding to servers Holiday
 INFO:root:attempting to connect to server Holiday
-INFO:root:established connection with unknown client
-INFO:root:INVALID message received: 
-INFO:root:sent: ? 
-INFO:root:closed connection with unknown client
+INFO:root:closed connection with neighboring server
 INFO:root:successfully connected to server Holiday
-INFO:root:sent to neighboring server Holiday: AT Hands 54690997.582561016 dog.cs.ucla.edu +34.068930-118.445127 1520023934.918963997
+INFO:root:sent to neighboring server Holiday: AT Hands 54724239.04519844 kiwi.cs.ucla.edu +34.068930-118.445127 1520023934.918963997
 INFO:root:closed connection with server Holiday
 INFO:root:established a connection with neighboring server
-INFO:root:received from neighboring server: AT Holiday 54691096.60793829 kiwi.cs.ucla.edu +34.068930-118.445127 1520023934.918963997
-INFO:root:updating location info for client kiwi.cs.ucla.edu
-INFO:root:closed connection with neighboring server
+INFO:root:received from neighboring server: AT Hands 54724246.080387354 dog.cs.ucla.edu +34.068930-118.445127 1520023934.918963997
+INFO:root:updating location info for client dog.cs.ucla.edu
 INFO:root:flooding to servers Holiday
 INFO:root:attempting to connect to server Holiday
-INFO:root:established connection with unknown client
-INFO:root:INVALID message received: 
-INFO:root:sent: ? 
-INFO:root:closed connection with unknown client
+INFO:root:closed connection with neighboring server
 INFO:root:successfully connected to server Holiday
-INFO:root:sent to neighboring server Holiday: AT Holiday 54691096.60793829 kiwi.cs.ucla.edu +34.068930-118.445127 1520023934.918963997
+INFO:root:sent to neighboring server Holiday: AT Hands 54724246.080387354 dog.cs.ucla.edu +34.068930-118.445127 1520023934.918963997
 INFO:root:closed connection with server Holiday

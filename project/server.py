@@ -68,15 +68,6 @@ def valid_timestamp(timestamp):
     except:
         return False
 
-def invalid_message(message, writer):
-    logging.info("established connection with unknown client")
-    logging.info("INVALID message received: {}".format(message))
-    response = "? {}".format(message)
-    response_with_newline = response + '\n'
-    writer.write(response_with_newline.encode())
-    logging.info("sent: {}".format(response))
-    logging.info("closed connection with unknown client")
-
 def untokenize(tokens):
     ret_str = ""
     for i in range(len(tokens)):
@@ -94,6 +85,7 @@ class Server:
         self.host = host
         self.port = valid_server_names[name]
         self.client_locations = {}
+        self.connections = {}
         self.writer = None
     
     async def interpret_message(self, reader, writer):
@@ -102,9 +94,16 @@ class Server:
             message = data.decode()
             message = message[:-1]
             tokens = message.split()
+            client_num = writer.get_extra_info('peername')
             if (len(tokens) != 4) or (tokens[0] not in commands):
-                if (len(tokens) != 6) or (tokens[0] != "AT"):
-                    invalid_message(message, writer)
+                if len(tokens) == 0:
+                    if client_num in self.connections:
+                        logging.info("closed connection with client {}".format(self.connections[client_num]))
+                        del self.connections[client_num]
+                    else:
+                        logging.info("closed connection with neighboring server")
+                elif (len(tokens) != 6) or (tokens[0] != "AT"):
+                    self.invalid_message(message, writer)
                 else:
                     #no need to check the parameters of 'AT' because server sent it and it must be correct
                     logging.info("established a connection with neighboring server")
@@ -119,27 +118,41 @@ class Server:
                         self.loop.create_task(self.flood(message))
                     else:
                         logging.info("location info already up to date for client {}".format(tokens[3]))
-                    
-                    logging.info("closed connection with neighboring server")
             else:
                 if tokens[0] == 'WHATSAT':
                     if (not tokens[2].isdigit()) or (not tokens[3].isdigit()):
-                        invalid_message(message, writer)
+                        self.invalid_message(message, writer)
                     else:
-                        #log the client's info
-                        logging.info("established a connection with client {}".format(tokens[1]))
-                        logging.info("received from client {}: {}".format(tokens[1], message))
-                        self.process_whatsat(tokens, writer)
+                        #invalid because client location was not sent before requesting info
+                        if tokens[1] not in self.client_locations:
+                            to_send = "? " + message
+                            to_send_with_newline = to_send + '\n'
+                            if client_num in self.connections:
+                                sender = self.connections[client_num]
+                            else:
+                                sender = "unknown client"
+                            logging.info("INVALID message received from {} - client location info was not found: {}".format(sender, message))
+                            writer.write(to_send_with_newline.encode())
+                            logging.info("sent to client {}: {}".format(sender, to_send))
+                        else:
+                            if client_num not in self.connections:
+                                #log the client's info
+                                logging.info("established a connection with client {}".format(tokens[1]))
+                                self.connections[client_num] = tokens[1]
+                            logging.info("received from client {}: {}".format(self.connections[client_num], message))
+                            self.process_whatsat(tokens, writer)
                 elif tokens[0] == 'IAMAT':
                     if (not valid_timestamp(tokens[3])[0]) or (not valid_location(tokens[2])[0]):
-                        invalid_message(message, writer)
+                        self.invalid_message(message, writer)
                     else:
                         #log the client's info
-                        logging.info("established a connection with client {}".format(tokens[1]))
-                        logging.info("received from client {}: {}".format(tokens[1], message))
+                        if client_num not in self.connections:
+                            logging.info("established a connection with client {}".format(tokens[1]))
+                            self.connections[client_num] = tokens[1]
+                        logging.info("received from client {}: {}".format(self.connections[client_num], message))
                         self.process_iamat(tokens, writer)
                 else:
-                    invalid_message(message, writer)
+                    self.invalid_message(message, writer)
         await writer.drain()
         writer.close()
     
@@ -175,31 +188,28 @@ class Server:
             logging.info("location info already up to date for client {}".format(tokens_list[1]))
 
         #log info
-        logging.info("sent to client {}: {}".format(tokens_list[1], ret_string))
+        client_num = writer.get_extra_info('peername')
+        logging.info("sent to client {}: {}".format(self.connections[client_num], ret_string))
         return
 
     def process_whatsat(self, tokens_list, writer):
-        if tokens_list[1] not in self.client_locations:
-            #invalid because client location was not sent before requesting info
-            invalid_message(untokenize(tokens_list))
-            logging.info("Client location info was not found")
+        #process the number of results to be retrieved 
+        if int(tokens_list[3]) > 20:
+            num_results = 20
         else:
-            #process the number of results to be retrieved 
-            if int(tokens_list[3]) > 20:
-                num_results = 20
-            else:
-                num_results = int(tokens_list[3])
+            num_results = int(tokens_list[3])
 
-            #get the saved location and construct a string
-            location = self.client_locations[tokens_list[1]][0]
-            location_str = location[0] + ',' + location[1]
+        #get the saved location and construct a string
+        location = self.client_locations[tokens_list[1]][0]
+        location_str = location[0] + ',' + location[1]
 
-            #construct the query string
-            query = "{}location={}&radius={}&key={}".format(google_places_base_link, location_str, tokens_list[2], google_places_api_key)
-            time_diff = time.time() - float(self.client_locations[tokens_list[1]][1])
+        #construct the query string
+        query = "{}location={}&radius={}&key={}".format(google_places_base_link, location_str, tokens_list[2], google_places_api_key)
+        time_diff = time.time() - float(self.client_locations[tokens_list[1]][1])
 
-            #call the query function
-            self.loop.create_task(self.query_google(query, time_diff, tokens_list[1], num_results, writer))
+        #call the query function
+        client_num = writer.get_extra_info('peername')
+        self.loop.create_task(self.query_google(query, time_diff, self.connections[client_num], num_results, writer))
         return
     
     async def query_google(self, query, time_diff, client, num_results, writer):
@@ -212,7 +222,7 @@ class Server:
                     json_obj["results"] = json_obj["results"][:num_results]
 
                 json_str = json.dumps(json_obj, indent=4)
-
+                json_str += '}'
                 if time_diff > 0:
                     new_time_diff = "+"
                 
@@ -222,9 +232,9 @@ class Server:
                 response = "AT {} {} {} {} {}\n{}".format(self.name, time_diff, client, location_str, self.client_locations[client][1], process_json(json_str))
                 response_with_newline = response
                 response_with_newline += '\n'
-                writer.write(response.encode())
+                writer.write(response_with_newline.encode())
                 await writer.drain()
-                logging.info("sent to client {}: {}".format(client, response))
+                logging.info("sent to client {}: {}".format(client, response_with_newline))
 
     async def flood(self, message):
         flood_str = "flooding to servers "
@@ -249,6 +259,18 @@ class Server:
                 logging.info("closed connection with server {}".format(server))
             except ConnectionRefusedError:
                 logging.info("unable to connect to server {}".format(server))
+    
+    def invalid_message(self, message, writer):
+        client_num = writer.get_extra_info('peername')
+        if client_num in self.connections:
+            sender = self.connections[client_num]
+        else:
+            sender = "unknown client"
+        logging.info("INVALID message received from {} - message format unable to be parsed: {}".format(sender, message))
+        response = "? {}".format(message)
+        response_with_newline = response + '\n'
+        writer.write(response_with_newline.encode())
+        logging.info("sent: {}".format(response))
 
 def main():
     if len(sys.argv) != 2:
@@ -274,5 +296,5 @@ if __name__ == '__main__':
 IAMAT kiwi.cs.ucla.edu +34.068930-118.445127 1520023934.918963997
 WHATSAT kiwi.cs.ucla.edu 10 5
 IAMAT dog.cs.ucla.edu +34.068930-118.445127 1520023934.918963997
-WHATSAT dog.cs.ucla.edu 10 5
+WHATSAT dog.cs.ucla.edu 10 1
 """
