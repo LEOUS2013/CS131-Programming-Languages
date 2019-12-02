@@ -1,50 +1,200 @@
 INFO:root:established a connection with neighboring server
-INFO:root:received from neighboring server: AT Hands 54724239.04519844 kiwi.cs.ucla.edu +34.068930-118.445127 1520023934.918963997
+INFO:root:received from neighboring server: AT Hands 55233971.34936571 kiwi.cs.ucla.edu +34.068930-118.445127 1520023934.918963997
 INFO:root:updating location info for client kiwi.cs.ucla.edu
 INFO:root:flooding to servers Hands, Holiday, Wilkes
 INFO:root:attempting to connect to server Hands
 INFO:root:closed connection with neighboring server
 INFO:root:established a connection with neighboring server
-INFO:root:received from neighboring server: AT Hands 54724239.04519844 kiwi.cs.ucla.edu +34.068930-118.445127 1520023934.918963997
+INFO:root:received from neighboring server: AT Hands 55233971.34936571 kiwi.cs.ucla.edu +34.068930-118.445127 1520023934.918963997
 INFO:root:location info already up to date for client kiwi.cs.ucla.edu
-INFO:root:successfully connected to server Hands
-INFO:root:sent to neighboring server Hands: AT Hands 54724239.04519844 kiwi.cs.ucla.edu +34.068930-118.445127 1520023934.918963997
 INFO:root:closed connection with neighboring server
+INFO:root:successfully connected to server Hands
+INFO:root:sent to neighboring server Hands: AT Hands 55233971.34936571 kiwi.cs.ucla.edu +34.068930-118.445127 1520023934.918963997
 INFO:root:closed connection with server Hands
 INFO:root:attempting to connect to server Holiday
 INFO:root:successfully connected to server Holiday
-INFO:root:sent to neighboring server Holiday: AT Hands 54724239.04519844 kiwi.cs.ucla.edu +34.068930-118.445127 1520023934.918963997
+INFO:root:sent to neighboring server Holiday: AT Hands 55233971.34936571 kiwi.cs.ucla.edu +34.068930-118.445127 1520023934.918963997
 INFO:root:closed connection with server Holiday
 INFO:root:attempting to connect to server Wilkes
 INFO:root:successfully connected to server Wilkes
-INFO:root:sent to neighboring server Wilkes: AT Hands 54724239.04519844 kiwi.cs.ucla.edu +34.068930-118.445127 1520023934.918963997
+INFO:root:sent to neighboring server Wilkes: AT Hands 55233971.34936571 kiwi.cs.ucla.edu +34.068930-118.445127 1520023934.918963997
 INFO:root:closed connection with server Wilkes
 INFO:root:established a connection with neighboring server
-INFO:root:received from neighboring server: AT Hands 54724239.04519844 kiwi.cs.ucla.edu +34.068930-118.445127 1520023934.918963997
+INFO:root:received from neighboring server: AT Hands 55233971.34936571 kiwi.cs.ucla.edu +34.068930-118.445127 1520023934.918963997
 INFO:root:location info already up to date for client kiwi.cs.ucla.edu
 INFO:root:closed connection with neighboring server
+INFO:root:established a connection with client kiwi.cs.ucla.edu
+INFO:root:received from client kiwi.cs.ucla.edu: WHATSAT kiwi.cs.ucla.edu 10 5
+INFO:root:sent to client kiwi.cs.ucla.edu: AT Hands 55234039.17758894 kiwi.cs.ucla.edu +34.068930-118.445127 1520023934.918963997
+{
+    "html_attributions": [],
+    "results": [
+        {
+            "geometry": {
+                "location": {
+                    "lat": 34.0688873,
+                    "lng": -118.4450169
+                },
+                "viewport": {
+                    "northeast": {
+                        "lat": 34.0702312302915,
+                        "lng": -118.4436835197085
+                    },
+                    "southwest": {
+                        "lat": 34.0675332697085,
+                        "lng": -118.4463814802915
+                    }
+                }
+            },
+            "icon": "https://maps.gstatic.com/mapfiles/place_api/icons/geocode-71.png",
+            "id": "ef162ea4f60a0b3933fae75544dba377b996befa",
+            "name": "Westwood Plaza",
+            "place_id": "ChIJ6Re7qYi8woAR22jVhVAye2M",
+            "reference": "ChIJ6Re7qYi8woAR22jVhVAye2M",
+            "scope": "GOOGLE",
+            "types": [
+                "route"
+            ],
+            "vicinity": "Los Angeles"
+        },
+        {
+            "geometry": {
+                "location": {
+                    "lat": 34.068921,
+                    "lng": -118.4451811
+                },
+                "viewport": {
+                    "northeast": {
+                        "lat": 34.0828575,
+                        "lng": -118.42990995
+                    },
+                    "southwest": {
+                        "lat": 34.0575047,
+                        "lng": -118.46313815
+                    }
+                }
+            },
+            "icon": "https://maps.gstatic.com/mapfiles/place_api/icons/school-71.png",
+            "id": "4d56f16ad3d8976d49143fa4fdfffbc0a7ce8e39",
+            "name": "University of California, Los Angeles",
+            "photos": [
+                {
+                    "height": 612,
+                    "html_attributions": [
+                        "<a href=\"https://maps.google.com/maps/contrib/116146160493067041309/photos\">Alberto Sancho</a>"
+                    ],
+                    "photo_reference": "CmRaAAAAXpvPPA6XY-duacoIi41DJpkBl5w7Hf-kTNkH4hSLJ88Ynbx2zGYsQk3Y0NM6IJN7mK_UcIUDt28r4k0w8YGqZt3ijC3gHgMrTeCIO0uYyk7yTf_kt0tBZiSJhYRs0nWbEhBrIYgPBN7oXhWXnFVza0-8GhSfs0RclNYzWDP9v9c8VoW6SevoZg",
+                    "width": 903
+                }
+            ],
+            "place_id": "ChIJZQ9c8IW8woARN0gTXFiTqSU",
+            "plus_code": {
+                "compound_code": "3H93+HW Los Angeles, California, United States",
+                "global_code": "85633H93+HW"
+            },
+            "rating": 4.5,
+            "reference": "ChIJZQ9c8IW8woARN0gTXFiTqSU",
+            "scope": "GOOGLE",
+            "types": [
+                "university",
+                "point_of_interest",
+                "establishment"
+            ],
+            "user_ratings_total": 1614,
+            "vicinity": "Los Angeles"
+        },
+        {
+            "geometry": {
+                "location": {
+                    "lat": 34.0522342,
+                    "lng": -118.2436849
+                },
+                "viewport": {
+                    "northeast": {
+                        "lat": 34.3373061,
+                        "lng": -118.1552891
+                    },
+                    "southwest": {
+                        "lat": 33.7036519,
+                        "lng": -118.6681759
+                    }
+                }
+            },
+            "icon": "https://maps.gstatic.com/mapfiles/place_api/icons/geocode-71.png",
+            "id": "7f7b7d8118ae8db8ed3f541159ac928c484d12ad",
+            "name": "Los Angeles",
+            "photos": [
+                {
+                    "height": 1520,
+                    "html_attributions": [
+                        "<a href=\"https://maps.google.com/maps/contrib/114834501174322863820/photos\">mke rom</a>"
+                    ],
+                    "photo_reference": "CmRaAAAAShIHqmlReTRhYGF5BOh1cdJQLldRb02KEuwWJ0-wGuZte7yRd3CkOYpXKT9dS8P45kd4LlxVN1imOEl12UyPH1vroybxc9t1zOHxxVwsw9tK4GgcEKM-5X-1B0NBOgTEEhB39uzhhg4yDfAbI7YhKOznGhQDtRYvugAKcUwkxi0RGTGoq_ue-w",
+                    "width": 2688
+                }
+            ],
+            "place_id": "ChIJE9on3F3HwoAR9AhGJW_fL-I",
+            "reference": "ChIJE9on3F3HwoAR9AhGJW_fL-I",
+            "scope": "GOOGLE",
+            "types": [
+                "locality",
+                "political"
+            ],
+            "vicinity": "Los Angeles"
+        }
+    ],
+    "status": "OK"
+}
+
+
+INFO:root:closed connection with client kiwi.cs.ucla.edu
 INFO:root:established a connection with neighboring server
-INFO:root:received from neighboring server: AT Hands 54724246.080387354 dog.cs.ucla.edu +34.068930-118.445127 1520023934.918963997
+INFO:root:received from neighboring server: AT Holiday 55234056.27694821 dog.cs.ucla.edu +34.068930-118.445127 1520023934.918963997
 INFO:root:updating location info for client dog.cs.ucla.edu
 INFO:root:flooding to servers Hands, Holiday, Wilkes
 INFO:root:attempting to connect to server Hands
 INFO:root:closed connection with neighboring server
+INFO:root:successfully connected to server Hands
+INFO:root:sent to neighboring server Hands: AT Holiday 55234056.27694821 dog.cs.ucla.edu +34.068930-118.445127 1520023934.918963997
 INFO:root:established a connection with neighboring server
-INFO:root:received from neighboring server: AT Hands 54724246.080387354 dog.cs.ucla.edu +34.068930-118.445127 1520023934.918963997
+INFO:root:received from neighboring server: AT Holiday 55234056.27694821 dog.cs.ucla.edu +34.068930-118.445127 1520023934.918963997
 INFO:root:location info already up to date for client dog.cs.ucla.edu
 INFO:root:closed connection with neighboring server
-INFO:root:successfully connected to server Hands
-INFO:root:sent to neighboring server Hands: AT Hands 54724246.080387354 dog.cs.ucla.edu +34.068930-118.445127 1520023934.918963997
 INFO:root:closed connection with server Hands
 INFO:root:attempting to connect to server Holiday
 INFO:root:successfully connected to server Holiday
-INFO:root:sent to neighboring server Holiday: AT Hands 54724246.080387354 dog.cs.ucla.edu +34.068930-118.445127 1520023934.918963997
+INFO:root:sent to neighboring server Holiday: AT Holiday 55234056.27694821 dog.cs.ucla.edu +34.068930-118.445127 1520023934.918963997
 INFO:root:closed connection with server Holiday
 INFO:root:attempting to connect to server Wilkes
 INFO:root:successfully connected to server Wilkes
-INFO:root:sent to neighboring server Wilkes: AT Hands 54724246.080387354 dog.cs.ucla.edu +34.068930-118.445127 1520023934.918963997
+INFO:root:sent to neighboring server Wilkes: AT Holiday 55234056.27694821 dog.cs.ucla.edu +34.068930-118.445127 1520023934.918963997
 INFO:root:closed connection with server Wilkes
 INFO:root:established a connection with neighboring server
-INFO:root:received from neighboring server: AT Hands 54724246.080387354 dog.cs.ucla.edu +34.068930-118.445127 1520023934.918963997
+INFO:root:received from neighboring server: AT Holiday 55234056.27694821 dog.cs.ucla.edu +34.068930-118.445127 1520023934.918963997
 INFO:root:location info already up to date for client dog.cs.ucla.edu
+INFO:root:closed connection with neighboring server
+INFO:root:established a connection with neighboring server
+INFO:root:received from neighboring server: AT Hands 55234074.71738887 kiwi.cs.ucla.edu +37.651790-122.423145 1520023944.918963997
+INFO:root:updating location info for client kiwi.cs.ucla.edu
+INFO:root:flooding to servers Hands, Holiday, Wilkes
+INFO:root:attempting to connect to server Hands
+INFO:root:closed connection with neighboring server
+INFO:root:established a connection with neighboring server
+INFO:root:received from neighboring server: AT Hands 55234074.71738887 kiwi.cs.ucla.edu +37.651790-122.423145 1520023944.918963997
+INFO:root:location info already up to date for client kiwi.cs.ucla.edu
+INFO:root:closed connection with neighboring server
+INFO:root:successfully connected to server Hands
+INFO:root:sent to neighboring server Hands: AT Hands 55234074.71738887 kiwi.cs.ucla.edu +37.651790-122.423145 1520023944.918963997
+INFO:root:closed connection with server Hands
+INFO:root:attempting to connect to server Holiday
+INFO:root:successfully connected to server Holiday
+INFO:root:sent to neighboring server Holiday: AT Hands 55234074.71738887 kiwi.cs.ucla.edu +37.651790-122.423145 1520023944.918963997
+INFO:root:closed connection with server Holiday
+INFO:root:attempting to connect to server Wilkes
+INFO:root:successfully connected to server Wilkes
+INFO:root:sent to neighboring server Wilkes: AT Hands 55234074.71738887 kiwi.cs.ucla.edu +37.651790-122.423145 1520023944.918963997
+INFO:root:closed connection with server Wilkes
+INFO:root:established a connection with neighboring server
+INFO:root:received from neighboring server: AT Hands 55234074.71738887 kiwi.cs.ucla.edu +37.651790-122.423145 1520023944.918963997
+INFO:root:location info already up to date for client kiwi.cs.ucla.edu
 INFO:root:closed connection with neighboring server

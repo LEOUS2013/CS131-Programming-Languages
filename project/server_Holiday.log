@@ -1,50 +1,170 @@
 INFO:root:established a connection with neighboring server
-INFO:root:received from neighboring server: AT Hands 54724239.04519844 kiwi.cs.ucla.edu +34.068930-118.445127 1520023934.918963997
+INFO:root:received from neighboring server: AT Hands 55233971.34936571 kiwi.cs.ucla.edu +34.068930-118.445127 1520023934.918963997
 INFO:root:updating location info for client kiwi.cs.ucla.edu
 INFO:root:flooding to servers Welsh, Wilkes, Goloman
 INFO:root:attempting to connect to server Welsh
 INFO:root:closed connection with neighboring server
 INFO:root:successfully connected to server Welsh
-INFO:root:sent to neighboring server Welsh: AT Hands 54724239.04519844 kiwi.cs.ucla.edu +34.068930-118.445127 1520023934.918963997
+INFO:root:sent to neighboring server Welsh: AT Hands 55233971.34936571 kiwi.cs.ucla.edu +34.068930-118.445127 1520023934.918963997
 INFO:root:established a connection with neighboring server
-INFO:root:received from neighboring server: AT Hands 54724239.04519844 kiwi.cs.ucla.edu +34.068930-118.445127 1520023934.918963997
+INFO:root:received from neighboring server: AT Hands 55233971.34936571 kiwi.cs.ucla.edu +34.068930-118.445127 1520023934.918963997
 INFO:root:location info already up to date for client kiwi.cs.ucla.edu
 INFO:root:closed connection with neighboring server
 INFO:root:closed connection with server Welsh
 INFO:root:attempting to connect to server Wilkes
 INFO:root:successfully connected to server Wilkes
-INFO:root:sent to neighboring server Wilkes: AT Hands 54724239.04519844 kiwi.cs.ucla.edu +34.068930-118.445127 1520023934.918963997
+INFO:root:sent to neighboring server Wilkes: AT Hands 55233971.34936571 kiwi.cs.ucla.edu +34.068930-118.445127 1520023934.918963997
 INFO:root:closed connection with server Wilkes
 INFO:root:attempting to connect to server Goloman
 INFO:root:established a connection with neighboring server
-INFO:root:received from neighboring server: AT Hands 54724239.04519844 kiwi.cs.ucla.edu +34.068930-118.445127 1520023934.918963997
+INFO:root:received from neighboring server: AT Hands 55233971.34936571 kiwi.cs.ucla.edu +34.068930-118.445127 1520023934.918963997
 INFO:root:location info already up to date for client kiwi.cs.ucla.edu
-INFO:root:closed connection with neighboring server
 INFO:root:successfully connected to server Goloman
-INFO:root:sent to neighboring server Goloman: AT Hands 54724239.04519844 kiwi.cs.ucla.edu +34.068930-118.445127 1520023934.918963997
+INFO:root:sent to neighboring server Goloman: AT Hands 55233971.34936571 kiwi.cs.ucla.edu +34.068930-118.445127 1520023934.918963997
+INFO:root:closed connection with neighboring server
 INFO:root:closed connection with server Goloman
-INFO:root:established a connection with neighboring server
-INFO:root:received from neighboring server: AT Hands 54724246.080387354 dog.cs.ucla.edu +34.068930-118.445127 1520023934.918963997
+INFO:root:established a connection with client dog.cs.ucla.edu
+INFO:root:received from client dog.cs.ucla.edu: IAMAT dog.cs.ucla.edu +34.068930-118.445127 1520023934.918963997
 INFO:root:updating location info for client dog.cs.ucla.edu
+INFO:root:sent to client dog.cs.ucla.edu: AT Holiday 55234056.27694821 dog.cs.ucla.edu +34.068930-118.445127 1520023934.918963997
 INFO:root:flooding to servers Welsh, Wilkes, Goloman
 INFO:root:attempting to connect to server Welsh
-INFO:root:closed connection with neighboring server
 INFO:root:successfully connected to server Welsh
-INFO:root:sent to neighboring server Welsh: AT Hands 54724246.080387354 dog.cs.ucla.edu +34.068930-118.445127 1520023934.918963997
-INFO:root:established a connection with neighboring server
-INFO:root:received from neighboring server: AT Hands 54724246.080387354 dog.cs.ucla.edu +34.068930-118.445127 1520023934.918963997
-INFO:root:location info already up to date for client dog.cs.ucla.edu
+INFO:root:sent to neighboring server Welsh: AT Holiday 55234056.27694821 dog.cs.ucla.edu +34.068930-118.445127 1520023934.918963997
 INFO:root:closed connection with server Welsh
 INFO:root:attempting to connect to server Wilkes
-INFO:root:closed connection with neighboring server
 INFO:root:successfully connected to server Wilkes
-INFO:root:sent to neighboring server Wilkes: AT Hands 54724246.080387354 dog.cs.ucla.edu +34.068930-118.445127 1520023934.918963997
-INFO:root:established a connection with neighboring server
-INFO:root:received from neighboring server: AT Hands 54724246.080387354 dog.cs.ucla.edu +34.068930-118.445127 1520023934.918963997
-INFO:root:location info already up to date for client dog.cs.ucla.edu
+INFO:root:sent to neighboring server Wilkes: AT Holiday 55234056.27694821 dog.cs.ucla.edu +34.068930-118.445127 1520023934.918963997
 INFO:root:closed connection with server Wilkes
 INFO:root:attempting to connect to server Goloman
-INFO:root:closed connection with neighboring server
 INFO:root:successfully connected to server Goloman
-INFO:root:sent to neighboring server Goloman: AT Hands 54724246.080387354 dog.cs.ucla.edu +34.068930-118.445127 1520023934.918963997
+INFO:root:sent to neighboring server Goloman: AT Holiday 55234056.27694821 dog.cs.ucla.edu +34.068930-118.445127 1520023934.918963997
+INFO:root:established a connection with neighboring server
+INFO:root:received from neighboring server: AT Holiday 55234056.27694821 dog.cs.ucla.edu +34.068930-118.445127 1520023934.918963997
+INFO:root:location info already up to date for client dog.cs.ucla.edu
 INFO:root:closed connection with server Goloman
+INFO:root:closed connection with neighboring server
+INFO:root:established a connection with neighboring server
+INFO:root:received from neighboring server: AT Holiday 55234056.27694821 dog.cs.ucla.edu +34.068930-118.445127 1520023934.918963997
+INFO:root:location info already up to date for client dog.cs.ucla.edu
+INFO:root:closed connection with neighboring server
+INFO:root:established a connection with neighboring server
+INFO:root:received from neighboring server: AT Holiday 55234056.27694821 dog.cs.ucla.edu +34.068930-118.445127 1520023934.918963997
+INFO:root:location info already up to date for client dog.cs.ucla.edu
+INFO:root:closed connection with neighboring server
+INFO:root:closed connection with client dog.cs.ucla.edu
+INFO:root:established a connection with neighboring server
+INFO:root:received from neighboring server: AT Hands 55234074.71738887 kiwi.cs.ucla.edu +37.651790-122.423145 1520023944.918963997
+INFO:root:updating location info for client kiwi.cs.ucla.edu
+INFO:root:flooding to servers Welsh, Wilkes, Goloman
+INFO:root:attempting to connect to server Welsh
+INFO:root:established a connection with neighboring server
+INFO:root:received from neighboring server: AT Hands 55234074.71738887 kiwi.cs.ucla.edu +37.651790-122.423145 1520023944.918963997
+INFO:root:location info already up to date for client kiwi.cs.ucla.edu
+INFO:root:closed connection with neighboring server
+INFO:root:closed connection with neighboring server
+INFO:root:successfully connected to server Welsh
+INFO:root:sent to neighboring server Welsh: AT Hands 55234074.71738887 kiwi.cs.ucla.edu +37.651790-122.423145 1520023944.918963997
+INFO:root:closed connection with server Welsh
+INFO:root:attempting to connect to server Wilkes
+INFO:root:successfully connected to server Wilkes
+INFO:root:sent to neighboring server Wilkes: AT Hands 55234074.71738887 kiwi.cs.ucla.edu +37.651790-122.423145 1520023944.918963997
+INFO:root:closed connection with server Wilkes
+INFO:root:attempting to connect to server Goloman
+INFO:root:successfully connected to server Goloman
+INFO:root:sent to neighboring server Goloman: AT Hands 55234074.71738887 kiwi.cs.ucla.edu +37.651790-122.423145 1520023944.918963997
+INFO:root:closed connection with server Goloman
+INFO:root:established a connection with neighboring server
+INFO:root:received from neighboring server: AT Hands 55234074.71738887 kiwi.cs.ucla.edu +37.651790-122.423145 1520023944.918963997
+INFO:root:location info already up to date for client kiwi.cs.ucla.edu
+INFO:root:closed connection with neighboring server
+INFO:root:established a connection with client kiwi.cs.ucla.edu
+INFO:root:received from client kiwi.cs.ucla.edu: WHATSAT kiwi.cs.ucla.edu 10 5
+INFO:root:sent to client kiwi.cs.ucla.edu: AT Hands 55234087.89927745 kiwi.cs.ucla.edu +37.651790-122.423145 1520023944.918963997
+{
+    "html_attributions": [],
+    "results": [
+        {
+            "geometry": {
+                "location": {
+                    "lat": 37.654656,
+                    "lng": -122.4077498
+                },
+                "viewport": {
+                    "northeast": {
+                        "lat": 37.6728499,
+                        "lng": -122.2205311
+                    },
+                    "southwest": {
+                        "lat": 37.6324597,
+                        "lng": -122.471684
+                    }
+                }
+            },
+            "icon": "https://maps.gstatic.com/mapfiles/place_api/icons/geocode-71.png",
+            "id": "1b4a947eed2ca097aea75466bc58056d637d8074",
+            "name": "South San Francisco",
+            "photos": [
+                {
+                    "height": 3060,
+                    "html_attributions": [
+                        "<a href=\"https://maps.google.com/maps/contrib/115770079482352181536/photos\">Nick Zi Chen</a>"
+                    ],
+                    "photo_reference": "CmRaAAAAVlcgEC9RQuJAT8MsRtkJUB0aUQNE--1-M7d9mXDylqsuIwgNbfvnFQa-wL_KcpPtXqrxFHB3YDVirmpQzj7ezbtt0wMwgadq-H2yyPuBX0-_EYQ6aLG1H8MD6Sl6fvzREhDI7qw3MW5rkekvrDdXf-9KGhQI6Y9PE3ZQieCUG_Z-DY3Jng7E-w",
+                    "width": 4077
+                }
+            ],
+            "place_id": "ChIJ7-z-QwV5j4ARXTNW53l1Ovg",
+            "reference": "ChIJ7-z-QwV5j4ARXTNW53l1Ovg",
+            "scope": "GOOGLE",
+            "types": [
+                "locality",
+                "political"
+            ],
+            "vicinity": "South San Francisco"
+        },
+        {
+            "geometry": {
+                "location": {
+                    "lat": 37.6498225,
+                    "lng": -122.4254897
+                },
+                "viewport": {
+                    "northeast": {
+                        "lat": 37.657433,
+                        "lng": -122.417883
+                    },
+                    "southwest": {
+                        "lat": 37.643683,
+                        "lng": -122.4329827
+                    }
+                }
+            },
+            "icon": "https://maps.gstatic.com/mapfiles/place_api/icons/geocode-71.png",
+            "id": "aadbcafcc58874a7622c44cdf50418e1f96b5188",
+            "name": "Orange Park",
+            "photos": [
+                {
+                    "height": 2322,
+                    "html_attributions": [
+                        "<a href=\"https://maps.google.com/maps/contrib/113912983552702927738/photos\">hak siaci</a>"
+                    ],
+                    "photo_reference": "CmRaAAAAJni8RY_aCk8ROPHg84gOX0u69xELQdOUicrYTmmYg9jsfbkylh0jMaZNttrrURttooND-OIf8afsqMencbiy0X0M4qIUZPXWwho10Q5rpB76M8xBNFn06QKrtKhGfpBjEhCjx2xP5wSnyWE1XiBL4bWkGhThoXv-YQUag-7I6Ymk9gjL2oZWfg",
+                    "width": 4128
+                }
+            ],
+            "place_id": "ChIJ5_3Ot5h5j4ARVjfj4c-btJ4",
+            "reference": "ChIJ5_3Ot5h5j4ARVjfj4c-btJ4",
+            "scope": "GOOGLE",
+            "types": [
+                "neighborhood",
+                "political"
+            ],
+            "vicinity": "South San Francisco"
+        }
+    ],
+    "status": "OK"
+}
+
+
+INFO:root:closed connection with client kiwi.cs.ucla.edu

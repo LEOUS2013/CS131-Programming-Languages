@@ -113,7 +113,7 @@ class Server:
                     location = valid_location(tokens[4])[1:3]
                     if tokens[3] not in self.client_locations or float(self.client_locations[tokens[3]][1]) < float(tokens[5]):
                         logging.info("updating location info for client {}".format(tokens[3]))
-                        self.client_locations[tokens[3]] = location, tokens[5]
+                        self.client_locations[tokens[3]] = location, tokens[5], tokens[1]
                         #propagate info to other servers
                         self.loop.create_task(self.flood(message))
                     else:
@@ -140,7 +140,7 @@ class Server:
                                 logging.info("established a connection with client {}".format(tokens[1]))
                                 self.connections[client_num] = tokens[1]
                             logging.info("received from client {}: {}".format(self.connections[client_num], message))
-                            self.process_whatsat(tokens, writer)
+                            await self.process_whatsat(tokens, writer)
                 elif tokens[0] == 'IAMAT':
                     if (not valid_timestamp(tokens[3])[0]) or (not valid_location(tokens[2])[0]):
                         self.invalid_message(message, writer)
@@ -150,7 +150,7 @@ class Server:
                             logging.info("established a connection with client {}".format(tokens[1]))
                             self.connections[client_num] = tokens[1]
                         logging.info("received from client {}: {}".format(self.connections[client_num], message))
-                        self.process_iamat(tokens, writer)
+                        await self.process_iamat(tokens, writer)
                 else:
                     self.invalid_message(message, writer)
         await writer.drain()
@@ -170,7 +170,7 @@ class Server:
         self.loop.run_until_complete(server.wait_closed())
         self.loop.close()
 
-    def process_iamat(self, tokens_list, writer):
+    async def process_iamat(self, tokens_list, writer):
         #send response to client
         time_diff = time.time() - float(tokens_list[3])
         ret_string = "AT {} {} {} {} {}".format(self.name, time_diff, tokens_list[1], tokens_list[2], tokens_list[3])
@@ -181,7 +181,7 @@ class Server:
         location = valid_location(tokens_list[2])[1:3]
         if tokens_list[1] not in self.client_locations or float(self.client_locations[tokens_list[1]][1]) < float(tokens_list[3]):
             logging.info("updating location info for client {}".format(tokens_list[1]))
-            self.client_locations[tokens_list[1]] = location, tokens_list[3]
+            self.client_locations[tokens_list[1]] = location, tokens_list[3], self.name
             #propagate info to other servers
             self.loop.create_task(self.flood(ret_string))
         else:
@@ -192,7 +192,7 @@ class Server:
         logging.info("sent to client {}: {}".format(self.connections[client_num], ret_string))
         return
 
-    def process_whatsat(self, tokens_list, writer):
+    async def process_whatsat(self, tokens_list, writer):
         #process the number of results to be retrieved 
         if int(tokens_list[3]) > 20:
             num_results = 20
@@ -209,7 +209,7 @@ class Server:
 
         #call the query function
         client_num = writer.get_extra_info('peername')
-        self.loop.create_task(self.query_google(query, time_diff, self.connections[client_num], num_results, writer))
+        await self.query_google(query, time_diff, self.connections[client_num], num_results, writer)
         return
     
     async def query_google(self, query, time_diff, client, num_results, writer):
@@ -229,7 +229,7 @@ class Server:
                 new_time_diff += str(time_diff)
                 
                 location_str = "{}{}".format(self.client_locations[client][0][0], self.client_locations[client][0][1])
-                response = "AT {} {} {} {} {}\n{}".format(self.name, time_diff, client, location_str, self.client_locations[client][1], process_json(json_str))
+                response = "AT {} {} {} {} {}\n{}".format(self.client_locations[client][2], time_diff, client, location_str, self.client_locations[client][1], process_json(json_str))
                 response_with_newline = response
                 response_with_newline += '\n'
                 writer.write(response_with_newline.encode())
@@ -297,4 +297,6 @@ IAMAT kiwi.cs.ucla.edu +34.068930-118.445127 1520023934.918963997
 WHATSAT kiwi.cs.ucla.edu 10 5
 IAMAT dog.cs.ucla.edu +34.068930-118.445127 1520023934.918963997
 WHATSAT dog.cs.ucla.edu 10 1
+IAMAT kiwi.cs.ucla.edu +37.651790-122.423145 1520023944.918963997
+WHATSAT kiwi.cs.ucla.edu 10 5
 """
