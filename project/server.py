@@ -15,7 +15,7 @@ server_routes = {
 }
 commands = ["IAMAT", "WHATSAT", "AT"]
 google_places_base_link = "https://maps.googleapis.com/maps/api/place/nearbysearch/json?"
-google_places_api_key = "AIzaSyBbECdJ3N70JL-N8Li8OqClcDdyO7sG-Ng"
+google_places_api_key = "<insert-key-here>"
 
 def process_json(json_str):
     new_str = ""
