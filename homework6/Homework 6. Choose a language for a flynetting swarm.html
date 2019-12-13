@@ -1,0 +1,150 @@
+<!DOCTYPE html>
+<!-- saved from url=(0055)http://web.cs.ucla.edu/classes/fall19/cs131/hw/hw6.html -->
+<html lang="en"><head><meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<title>Homework 6. Choose a language for a flynetting swarm</title>
+
+<link rel="author" href="mailto:eggert@cs.ucla.edu">
+<link rel="license" href="http://web.cs.ucla.edu/classes/fall19/cs131/hw/copyright.html">
+</head>
+
+<body>
+
+<h1>Homework 6. Choose a language for a flynetting swarm</h1>
+
+<p><small>[<a href="http://web.cs.ucla.edu/classes/fall19/cs131/index.html">131 home</a> &gt; <a href="http://web.cs.ucla.edu/classes/fall19/cs131/homework.html">Homework</a>]</small></p>
+
+<h2>Motivation</h2>
+
+<p>You’re working for XuFly, a startup company that intends to build
+swarms of tiny flying robots that will kill insects. The robots are
+intended for use in areas like farmers’ markets where swarms of
+insects are common and where conventional chemical treatments are not
+allowed. The idea is that each swarm of robots will be equipped with
+nets that capture flying insects.  A planned, more-advanced version of
+the robot swarms will sport flyswatters to handle insects that are not
+flying.</p>
+
+<p>Your boss has assigned you the job of writing the code that runs in
+the robots. The robots’ processors will be equipped with
+low-power CPUs and AI accelerators to implement the algorithms to
+recognize flying insects (and eventually, stationary insects) and to
+control the robots’ actions. Robot swarms will divide, merge, and
+collaborate as necessary to control insects as efficiently as
+possible. When a robot runs low on power it will fly to a charging
+station and charge itself back up.</p>
+
+<p>The code that you’re in charge of will need to operate many
+algorithms, some involving machine-learning-based recognition and some
+involving cooperation. For example, your boss is interested in having
+you try the swarm gradient bug algorithm (SGBA). See:
+McGuire KN, De Wagter C, Tuyls K, Kappen HJ, de Croon GCHE.
+<a href="https://robotics.sciencemag.org/content/robotics/4/35/eaaw9710.full.pdf">Minimal
+navigation solution for a swarm of tiny flying robots to explore an
+unknown environment</a>. <em>Sci Robot</em>. 2019;4(35):eaaw9710.
+doi:<a href="https://dx.doi.org/10.1126/scirobotics.aaw9710">10.1126/scirobotics.aaw9710</a>.</p>
+
+<p>Your company has previously prototyped robots by writing C++ code,
+but this effort has had the usual problems with buggy programs
+containing invalid address, race conditions, and the like, and your
+boss is interested in possibly choosing a better language for this set
+of applications since you’ll need to write these applications from
+scratch – or maybe you’ll just stick with C++. Also, your
+company would like to choose hardware that is cost-effective and
+cheap, and wants the ability to switch suppliers between one robot
+model and the next; it would not like to be tied down to any
+particular supplier due to its choice of programming language.</p>
+
+<p>Here are some potential technologies that your company may use,
+and would like your language choice to work well with:</p>
+
+<ul>
+  <li><a href="https://coral.ai/products/som/">Coral SoM</a></li>
+  <li><a href="https://www.nvidia.com/en-us/autonomous-machines/embedded-systems/jetson-xavier-nx/">Jetson Xavier NX</a></li>
+  <li><a href="https://ai.googleblog.com/2019/11/introducing-next-generation-on-device.html">MobileNetV3 and MobileNetEdgeTPU</a></li>
+  <li><a href="https://newsroom.intel.com/news/intel-speeds-ai-development-deployment-performance-new-class-ai-hardware-cloud-edge/">Movidius VPU (2020 version)</a></li>
+  <li><a href="https://software.intel.com/en-us/openvino-toolkit">OpenVINO</a></li>
+  <li><a href="https://www.tensorflow.org/lite">TensorFlow Lite</a></li>
+  <li><a href="https://developer.nvidia.com/tensorrt">TensorRT</a></li>
+</ul>
+
+<h2>Assignment</h2>
+
+<p>Review the abovementioned sources, and any other that seem relevant for
+this application, and compare and contrast the following languages as
+candidates for the code that XuFly will write for its flying robots:</p>
+
+<ul>
+  <li>C++</li>
+  <li><a href="https://golang.org/">Go</a></li>
+  <li>Java</li>
+  <li>Python</li>
+</ul>
+
+<p>You already know C++, Java and Python from previous classes or assignments.
+Familiarize yourself with Go enough to write and test a simple
+function <samp>everyNth</samp> that accepts
+a <a href="https://golang.org/pkg/container/list/">list</a> L and a
+positive integer N and returns a new list containing every Nth element
+of L, starting with the (N−1)st (counting from zero) element,
+then the (2N−1)st element, and so on until L’s elements are
+exhausted so that the returned list’s size is ⌊len(L) /
+N⌋ (where ⌊<var>x</var>⌋ is
+the <a href="https://en.wikipedia.org/wiki/Floor_and_ceiling_functions">floor</a>
+of <var>x</var>). The method should accept any list and should consume
+O(len(L)) time and O(len(L)/N) space. Put your function into a
+file <samp>everyNth.go</samp> that tests your function on a list of
+the first 1000 nonnegative integers and on an N equal to 109, and
+which prints the integers in the resulting list, one per line.  The
+shell command <samp>go build &amp;&amp; ./everyNth</samp> should test your
+program.
+</p>
+
+<p>Do some research on your four languages and support software as a
+potential platform. Your research should include an examination of the
+language and system documentation to help determine whether it would
+be effective. We want an alternative that supports the proposed
+application well.
+</p>
+
+<p>We are not expecting working prototypes for the proposed application.</p>
+
+<p>Write an executive summary that compares the four alternate
+approaches to each other. The
+summary should be in 10-point font or larger and should be at most
+three pages. You can put references and appendixes in later pages, if
+you can’t get under the page limit otherwise: the appendixes should contain
+any source code or diagrams. Your summary should focus on the
+technologies’ effects on ease of use, flexibility, generality,
+performance, reliability; thie idea is to explore the most-important
+technical challenges in doing the proposed rewrite. The summary should
+be suitable for software executives, that is, for readers who have
+some expertise in software, particularly in managing software
+developers, but who are not experts in the
+languages. Please keep the <a href="http://web.cs.ucla.edu/classes/fall19/cs131/comm.html">resources for written
+reports and oral presentations</a> in mind, particularly its rubrics
+and its advice for citations to sources that you consulted.</p>
+
+<h2>Submit</h2>
+
+<p>Submit a file <samp>hw6.pdf</samp> containing your summary. Submit
+your <samp>everyNth</samp> implementation and test, along with any
+other prototype code, as a compressed tarball <samp>hw6.tar.gz</samp>
+in the usual way. Your tarball should include a simple
+<samp>Makefile</samp> such that the command <samp>make check</samp>
+builds and runs your test case. You can augment the makefile
+to build and run any other prototype code you submit.</p>
+
+<footer>
+<hr>
+<small>
+ © 2013–2019 <a href="http://web.cs.ucla.edu/classes/fall19/cs131/mail-eggert.html">Paul Eggert</a>.
+ See <a href="http://web.cs.ucla.edu/classes/fall19/cs131/copyright.html">copying rules</a>.<br>
+
+ $Id: hw6.html,v 1.66 2019/11/21 21:32:46 eggert Exp $
+
+</small>
+</footer>
+
+
+
+</body></html>
