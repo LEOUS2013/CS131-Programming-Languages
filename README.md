@@ -1,7 +1,7 @@
 # Grades
 
 Homework | Score | Assignment Spec | Deliverables | Comments
----- | ---- | ---- | ----
+---- | ---- | ---- | ---- | ----
 1 | 100 | [Fixpoints and Grammar Filters](http://htmlpreview.github.com/?https://github.com/raymondlin1/CS131-Programming-Languages/blob/master/homework1/Homework%201.%20Fixpoints%20and%20grammar%20filters.html) | hw1.ml, hw1test.ml
 2 | 99 | [Naive Parsing of Context Free Grammars](http://htmlpreview.github.com/?https://github.com/raymondlin1/CS131-Programming-Languages/blob/master/homework2/Homework%202.%20Naive%20parsing%20of%20context%20free%20grammars.html) | hw2.ml, hw2test.ml
 3 | 91 | [Java Shared Memory Performance Races](http://htmlpreview.github.com/?https://github.com/raymondlin1/CS131-Programming-Languages/blob/master/homework3/Homework%203.%20Java%20shared%20memory%20performance%20races.html) | AcmeSafe.java, report.pdf
